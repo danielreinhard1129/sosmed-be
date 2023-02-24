@@ -25,6 +25,7 @@ app.use('/tweet', tweetRouter);
 // ERROR-HANDLING
 app.use((error, request, response, next) => { // default parameternya ada 4 
     if(error){
+        console.log(error)
         return response.status(500).send(error);
     }
 });
