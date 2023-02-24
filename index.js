@@ -10,7 +10,8 @@ app.use(cors());
 app.use(express.json());
 app.use(bearerToken());
 
-app.use(express.static('src/public'))
+app.use("/", express.static(__dirname + "/src/public"));
+
 
 app.get('/', (req,res) => {
     res.status(200).send('<h1>TEMPLATE EXPRESS SOSMED</h1>')
@@ -25,7 +26,7 @@ app.use('/tweet', tweetRouter);
 // ERROR-HANDLING
 app.use((error, request, response, next) => { // default parameternya ada 4 
     if(error){
-        console.log(error)
+        console.log(error);
         return response.status(500).send(error);
     }
 });
