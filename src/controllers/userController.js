@@ -5,8 +5,9 @@ const { createToken } = require('../helper/jwt');
 const transporter = require('../helper/nodemailer');
 const hbs = require('nodemailer-express-handlebars');
 const fs = require('fs')
+const path = require('path');
 let salt = bcrypt.genSaltSync(10);
-
+// console.log(path.join(__dirname,'../helper'));
 module.exports = {
     register: async (req, res, next) => {
 
@@ -37,8 +38,12 @@ module.exports = {
 
                     // mengirimkan emailverifikasi
                     await transporter.use('compile', hbs({
-                        viewEngine: { extname: '.html', partialsDir: './src/helper', layoutsDir: './src/helper', defaultLayout: 'verifyacc.html' },
-                        viewPath: './src/helper',
+                        viewEngine: {
+                            extname: '.html', partialsDir: path.join(__dirname, '../helper'),
+                            layoutsDir: path.join(__dirname, '../helper'),
+                            defaultLayout: 'verifyacc.html'
+                        },
+                        viewPath: path.join(__dirname, '../helper'),
                         extName: '.html'
                     }));
                     await transporter.sendMail({
@@ -47,7 +52,7 @@ module.exports = {
                         subject: 'Verifikasi Akun',
                         template: 'verifyacc',
                         context: {
-                            link: `http://localhost:3000/verify/${token}`
+                            link: `https://sosmed-dn.netlify.app/verify/${token}`
                         }
                     })
                     return res.status(200).send({
@@ -180,8 +185,12 @@ module.exports = {
                 let token = createToken({ id, email })
 
                 await transporter.use('compile', hbs({
-                    viewEngine: { extname: '.html', partialsDir: './src/helper', layoutsDir: './src/helper', defaultLayout: 'resetpassword.html' },
-                    viewPath: './src/helper',
+                    viewEngine: {
+                        extname: '.html', partialsDir: path.join(__dirname, '../helper'),
+                        layoutsDir: path.join(__dirname,'../helper'),
+                        defaultLayout: 'resetpassword.html'
+                    },
+                    viewPath: path.join(__dirname,'../helper'),
                     extName: '.html'
                 }));
                 await transporter.sendMail({
@@ -190,7 +199,7 @@ module.exports = {
                     subject: 'New Password',
                     template: 'resetpassword',
                     context: {
-                        link: `http://localhost:3000/newpassword/${token}`
+                        link: `https://sosmed-dn.netlify.app/newpassword/${token}`
                     }
                 })
 
