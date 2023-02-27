@@ -41,7 +41,7 @@ module.exports = {
                         viewEngine: {
                             extname: '.html', partialsDir: path.join(__dirname, '../helper'),
                             layoutsDir: path.join(__dirname, '../helper'),
-                            defaultLayout: 'verifyacc.html'
+                            // defaultLayout: 'verifyacc.html'
                         },
                         viewPath: path.join(__dirname, '../helper'),
                         extName: '.html'
@@ -188,7 +188,7 @@ module.exports = {
                     viewEngine: {
                         extname: '.html', partialsDir: path.join(__dirname, '../helper'),
                         layoutsDir: path.join(__dirname,'../helper'),
-                        defaultLayout: 'resetpassword.html'
+                        // defaultLayout: 'resetpassword.html'
                     },
                     viewPath: path.join(__dirname,'../helper'),
                     extName: '.html'
